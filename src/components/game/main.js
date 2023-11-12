@@ -1,13 +1,10 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import {TrackballControls} from 'three/examples/jsm/controls/TrackballControls'
+import { controls, controls2, camera } from './camera';
+import { renderer } from './renderer';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
 const canvas = document.getElementById('game');
-const renderer = new THREE.WebGLRenderer({antialias: true});
-const controls = new OrbitControls(camera, renderer.domElement);
-const controls2  = new TrackballControls(camera, renderer.domElement);
+
 
 const square = new THREE.BoxGeometry(1,0.1,1);
 const light = new THREE.MeshBasicMaterial({color: 0xE0C4A8})
@@ -20,6 +17,11 @@ const ambl = new THREE.AmbientLight(0xFFFFFF)
 scene.background = new THREE.Color(0xff0000);
 renderer.setSize( window.innerWidth, window.innerHeight );
 canvas.appendChild( renderer.domElement);
+
+
+
+
+
 
 for (let x = 0; x < 10; x++){
 	for (let z = 0; z < 10; z++){
@@ -34,19 +36,6 @@ for (let x = 0; x < 10; x++){
 		board.add(cube)
 	}
 }
-controls.mouseButtons = {LEFT: 2, MIDDLE: 1, RIGHT: 0};
-controls.enableDamping = true;
-controls.dampingFactor = 0.2;
-controls.enableZoom = false;
-controls.enableRotate = false;
-
-controls2.noRotate = true;
-controls2.noPan = true;
-controls2.noZoom = false;
-controls.zoomSpeed = 1
-controls2.maxDistance = 30
-controls2.minDistance = 5
-controls2.dynamicDampingFactor = 0.8
 
 
 
@@ -54,8 +43,6 @@ controls2.dynamicDampingFactor = 0.8
 scene.add(ambl)
 scene.add(board);
 
-camera.position.z = 5;
-camera.position.y = 20
 
 
 
