@@ -44,6 +44,9 @@ controls2.noRotate = true;
 controls2.noPan = true;
 controls2.noZoom = false;
 controls.zoomSpeed = 1
+controls2.maxDistance = 30
+controls2.minDistance = 5
+controls2.dynamicDampingFactor = 0.8
 
 
 
@@ -62,10 +65,6 @@ function animate() {
 
 	const target = controls.target
 	controls2.target.set(target.x, target.y, target.z);
-
-	if (camera.position.y > 60){
-		camera.position.y = 20;
-	}
 
 	
 	controls.update();
