@@ -1,9 +1,11 @@
 import * as THREE from 'three';
-import { controls, controls2, camera} from './camera';
+import { camera, controls} from './camera';
 import { renderer } from './renderer';
+
 
 const scene = new THREE.Scene();
 const canvas = document.getElementById('game');
+const clock = new THREE.Clock();
 
 const square = new THREE.BoxGeometry(1,0.1,1);
 const light = new THREE.MeshBasicMaterial({color: 0xE0C4A8})
@@ -25,11 +27,7 @@ grab.addEventListener('mouseup', () =>{
 })
 
 
-window.addEventListener('resize', () =>{
-	camera.aspect = (window.innerWidth / window.innerHeight);
-	camera.updateProjectionMatrix()
-	renderer.setSize(window.innerWidth, window.innerHeight);
-})
+
 
 for (let x = 0; x < 10; x++){
 	for (let z = 0; z < 10; z++){
@@ -46,21 +44,18 @@ for (let x = 0; x < 10; x++){
 }
 
 
+
 scene.add(ambl)
 scene.add(board);
 
-
 function animate() {
+	const delta = clock.getDelta();
+	controls.update(delta)
 	requestAnimationFrame( animate );
-
-	const target = controls.target;
-	controls2.target.set(target.x, target.y, target.z);
-
-	
-	controls.update();
-	controls2.update();
 	renderer.render( scene, camera );
 }
+
+
 
 animate();
 
