@@ -1,12 +1,13 @@
 import * as THREE from 'three';
 import { camera, controls} from './camera';
 import { renderer } from './renderer';
-import CameraControls from 'camera-controls';
+
 
 
 const scene = new THREE.Scene();
 const canvas = document.getElementById('game');
 const clock = new THREE.Clock();
+const canvasGame = renderer.domElement;
 
 const square = new THREE.BoxGeometry(1,0.1,1);
 const light = new THREE.MeshBasicMaterial({color: 0xE0C4A8})
@@ -26,6 +27,21 @@ let previousMousePosition = {
     x: 0,
     y: 0,
 };
+
+function dragMouse(event){
+	controls.smoothTime = 0.4
+			controls.draggingSmoothTime = 0.001
+			if (isDragging) {
+				const deltaX = event.clientX - previousMousePosition.x;
+		
+				controls.rotate(deltaX * 0.0025, 0);
+		
+				previousMousePosition = {
+					x: event.clientX,
+					y: event.clientY,
+				};
+			}
+}
 
 scene.background = new THREE.Color(0xff0000);
 canvas.appendChild( renderer.domElement);
@@ -65,11 +81,11 @@ function animate() {
 	const delta = clock.getDelta();
 	if (cameraPos.y <= 15 && topPov == false){
 		topPov = true
-		const canvasGame = renderer.domElement;
 		controls.draggingSmoothTime = 0.2
 		controls.smoothTime = 0.4
 		controls.lerpLookAt(0, 10, 5, boardPos.x, boardPos.y, boardPos.z,0, 3,5, 0, 2, 0, 0.8, true)
 		canvasGame.addEventListener('mousedown', (event) => {
+			controls.smoothTime = 0.4
 			isDragging = true;
 			previousMousePosition = {
 				x: event.clientX,
@@ -78,28 +94,19 @@ function animate() {
 		});
 		
 		canvasGame.addEventListener('mouseup', () => {
+			controls.smoothTime = 0.4
 			isDragging = false;
 		});
 		
-		canvasGame.addEventListener('mousemove', (event) => {
-			controls.draggingSmoothTime = 0.001
-			if (isDragging) {
-				const deltaX = event.clientX - previousMousePosition.x;
-		
-				controls.rotate(deltaX * 0.0025, 0);
-		
-				previousMousePosition = {
-					x: event.clientX,
-					y: event.clientY,
-				};
-			}
-		});
+		canvasGame.addEventListener('mousemove', dragMouse)
 	}
 	else if (cameraPos.y > 5 && topPov == true){
 		controls.setLookAt(0, 20, 0, boardPos.x, boardPos.y, boardPos.z, true)
+		canvasGame.removeEventListener('mousemove', dragMouse)
 		controls.draggingSmoothTime = 0.2
 		controls.smoothTime = 0.4
 		topPov = false
+		renderer.domElement
 	}
 	controls.getPosition(cameraPos, true)
 	controls.getTarget(orbitPos)
