@@ -30,7 +30,7 @@ let previousMousePosition = {
 
 function dragMouse(event){
 	controls.smoothTime = 0.4
-			controls.draggingSmoothTime = 0.001
+			controls.draggingSmoothTime = 0.03
 			if (isDragging) {
 				const deltaX = event.clientX - previousMousePosition.x;
 		
@@ -38,7 +38,6 @@ function dragMouse(event){
 		
 				previousMousePosition = {
 					x: event.clientX,
-					y: event.clientY,
 				};
 			}
 }
@@ -85,7 +84,6 @@ function animate() {
 		controls.smoothTime = 0.4
 		controls.lerpLookAt(0, 10, 5, boardPos.x, boardPos.y, boardPos.z,0, 3,5, 0, 2, 0, 0.8, true)
 		canvasGame.addEventListener('mousedown', (event) => {
-			controls.smoothTime = 0.4
 			isDragging = true;
 			previousMousePosition = {
 				x: event.clientX,
