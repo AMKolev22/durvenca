@@ -18,7 +18,6 @@ const ambl = new THREE.AmbientLight(0xFFFFFF);
 
 let cameraPos = new THREE.Vector3();
 let boardPos = new THREE.Vector3();
-let orbitPos = new THREE.Vector3();
 
 let topPov = true
 
@@ -71,7 +70,6 @@ scene.add(board);
 boardPos.x = board.position.x;
 boardPos.y = board.position.y;
 boardPos.z = board.position.z;
-controls.get
 
 controls.getPosition(cameraPos, true)
 
@@ -101,13 +99,12 @@ function animate() {
 	else if (cameraPos.y > 5 && topPov == true){
 		controls.setLookAt(0, 20, 0, boardPos.x, boardPos.y, boardPos.z, true)
 		canvasGame.removeEventListener('mousemove', dragMouse)
-		controls.draggingSmoothTime = 0.2
-		controls.smoothTime = 0.4
+		controls.draggingSmoothTime = 0.15
+		controls.smoothTime = 0.2
 		topPov = false
 		renderer.domElement
 	}
 	controls.getPosition(cameraPos, true)
-	controls.getTarget(orbitPos)
 	console.log(cameraPos.y)
 	controls.update(delta)
 	requestAnimationFrame( animate );
