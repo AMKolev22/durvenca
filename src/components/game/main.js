@@ -41,6 +41,19 @@ function dragMouse(event){
 			}
 }
 
+const mouseup = () => {
+	controls.smoothTime = 0.4
+	isDragging = false;
+}
+const mousedown = (event) => {
+	isDragging = true;
+	previousMousePosition = {
+		x: event.clientX,
+		y: event.clientY,
+	};
+}
+
+
 scene.background = new THREE.Color(0xff0000);
 canvas.appendChild( renderer.domElement);
 const grab = document.querySelector('canvas')
@@ -76,29 +89,34 @@ controls.getPosition(cameraPos, true)
 
 function animate() {
 	const delta = clock.getDelta();
-	if (cameraPos.y <= 15 && topPov == false){
+	if (topPov) {
+		controls.smoothTime = 0.4
+		controls.draggingSmoothTime = 0.1
+		controls.truckSpeed = 2.5
+	}
+
+	if (cameraPos.y <= 15 && topPov == false) {
+
 		topPov = true
 		controls.draggingSmoothTime = 0.2
 		controls.smoothTime = 0.4
 		controls.lerpLookAt(0, 10, 5, boardPos.x, boardPos.y, boardPos.z,0, 3,5, 0, 2, 0, 0.8, true)
-		canvasGame.addEventListener('mousedown', (event) => {
-			isDragging = true;
-			previousMousePosition = {
-				x: event.clientX,
-				y: event.clientY,
-			};
-		});
+
+		canvasGame.addEventListener('mousedown', mousedown);
 		
-		canvasGame.addEventListener('mouseup', () => {
-			controls.smoothTime = 0.4
-			isDragging = false;
-		});
+		canvasGame.addEventListener('mouseup', mouseup);
 		
 		canvasGame.addEventListener('mousemove', dragMouse)
 	}
 	else if (cameraPos.y > 5 && topPov == true){
+
 		controls.setLookAt(0, 20, 0, boardPos.x, boardPos.y, boardPos.z, true)
+
+
 		canvasGame.removeEventListener('mousemove', dragMouse)
+		canvasGame.removeEventListener('mouseup', mouseup)
+		canvasGame.removeEventListener('mousedown', mousedown)
+
 		controls.draggingSmoothTime = 0.15
 		controls.smoothTime = 0.2
 		topPov = false
