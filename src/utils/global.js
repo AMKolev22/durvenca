@@ -6,3 +6,8 @@ export const textstyle ={
 color: '#efefef',
 fontFamily: 'Inter',
 }
+
+export const buttonstyle = {
+    ...textstyle,
+    backgroundColor: '#01C38D',
+}
