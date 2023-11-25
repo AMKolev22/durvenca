@@ -8,6 +8,7 @@ fontFamily: 'Inter',
 }
 
 export const buttonstyle = {
-    ...textstyle,
+    color: '#efefef',
     backgroundColor: '#01C38D',
+    fontFamily: 'Work Sans'
 }
