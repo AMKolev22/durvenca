@@ -12,3 +12,7 @@ export const buttonstyle = {
     backgroundColor: '#01C38D',
     fontFamily: 'Work Sans'
 }
+
+export const backgroundSecond = {
+backgroundColor: '#191E29'
+}
