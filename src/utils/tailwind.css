@@ -536,8 +536,92 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.absolute{
+  position: absolute;
+}
+
+.relative{
+  position: relative;
+}
+
+.top-0{
+  top: 0px;
+}
+
+.bottom-0{
+  bottom: 0px;
+}
+
+.bottom-\[20\%\]{
+  bottom: 20%;
+}
+
+.bottom-\[15\%\]{
+  bottom: 15%;
+}
+
 .ml-\[2\.8rem\]{
   margin-left: 2.8rem;
+}
+
+.mt-14{
+  margin-top: 3.5rem;
+}
+
+.mt-20{
+  margin-top: 5rem;
+}
+
+.mb-20{
+  margin-bottom: 5rem;
+}
+
+.mt-\[20vh\]{
+  margin-top: 20vh;
+}
+
+.-mb-\[20vh\]{
+  margin-bottom: -20vh;
+}
+
+.mb-\[20vh\]{
+  margin-bottom: 20vh;
+}
+
+.-mb-\[5vh\]{
+  margin-bottom: -5vh;
+}
+
+.-mb-\[10vh\]{
+  margin-bottom: -10vh;
+}
+
+.mt-24{
+  margin-top: 6rem;
+}
+
+.mt-32{
+  margin-top: 8rem;
+}
+
+.ml-auto{
+  margin-left: auto;
+}
+
+.mr-auto{
+  margin-right: auto;
+}
+
+.mb-4{
+  margin-bottom: 1rem;
+}
+
+.mb-8{
+  margin-bottom: 2rem;
+}
+
+.mb-6{
+  margin-bottom: 1.5rem;
 }
 
 .block{
@@ -584,6 +668,11 @@ video {
   background-repeat: no-repeat;
 }
 
+.object-center{
+  -o-object-position: center;
+     object-position: center;
+}
+
 .px-\[5\.8rem\]{
   padding-left: 5.8rem;
   padding-right: 5.8rem;
@@ -604,6 +693,10 @@ video {
 
 .text-\[1\.5rem\]{
   font-size: 1.5rem;
+}
+
+.text-\[1\.7rem\]{
+  font-size: 1.7rem;
 }
 
 .text-\[1\.8rem\]{
@@ -640,6 +733,10 @@ video {
 
 .tracking-wider{
   letter-spacing: 0.05em;
+}
+
+.opacity-\[0\.8\]{
+  opacity: 0.8;
 }
 
 .opacity-\[0\.95\]{
