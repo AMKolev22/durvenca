@@ -684,6 +684,14 @@ video {
   white-space: nowrap;
 }
 
+.whitespace-pre-wrap{
+  white-space: pre-wrap;
+}
+
+.whitespace-break-spaces{
+  white-space: break-spaces;
+}
+
 .rounded-2xl{
   border-radius: 1rem;
 }

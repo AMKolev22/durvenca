@@ -13,6 +13,9 @@ export default function CardArea(){
             color: '#3457D5',
             heading: 'CO2',
             stats: '>80%',
+            info: `increase over 
+the last`,
+            highlight: '30 years',
         }}/>
         </div>
     )
