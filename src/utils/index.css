@@ -50,3 +50,7 @@ html{
     margin-left: 1rem;
 }
 
+#span{
+    display: inline-block !important;
+}
+

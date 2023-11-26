@@ -1,4 +1,4 @@
-import {useEffect} from "react"
+import {useEffect, useRef} from "react"
 import "../../utils/tailwind.css"
 import AOS from "aos";
 import "aos/dist/aos.css"
@@ -13,7 +13,6 @@ export default function Hero(){
         AOS.refresh();
       }, [])
 
-      
 
     return(
         <div className="w-screen h-screen flex flex-col justify-center items-center bg-no-repeat relative " id = "hero" style={ background } data-aos-offset="15">
