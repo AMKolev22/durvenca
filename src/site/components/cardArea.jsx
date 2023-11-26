@@ -2,13 +2,15 @@ import {useEffect} from "react"
 import "../../utils/tailwind.css"
 import AOS from "aos";
 import "aos/dist/aos.css"
-import { backgroundSecond } from "../../utils/global"
+import { backgroundSecond, textstyle } from "../../utils/global"
 import Card from "./card";
 
 export default function CardArea(){
     return(
-        <div className="h-screen w-screen flex flex-row gap-14 pl-[10vw]" style={backgroundSecond} id = "card-area">
-        <Card 
+        <div className="w-screen h-screen pt-[10rem]" style={backgroundSecond}>
+            <h2 className="text-[6rem] font-bold tracking-wide opacity-95 mb-[15vh] pl-[10vw] leading-tight" style={textstyle}>There are a lot of problems <br /> going on including:</h2>
+            <div className="flex flex-row gap-16 pl-[10vw]" id = "card-area">
+                <Card 
         theme = {{
             color: '#3457D5',
             heading: 'CO2',
@@ -17,7 +19,7 @@ export default function CardArea(){
 the last`,
             highlight: '30 years',
         }}/>
-        <Card 
+                <Card 
         theme = {{
             color: '#FF6B00',
             heading: 'Temps',
@@ -26,7 +28,7 @@ the last`,
 a row`,
             highlight: '(2014-2022)',
         }}/>
-        <Card 
+                <Card 
         theme = {{
             color: '#00AB66',
             heading: 'Forestation',
@@ -35,6 +37,7 @@ a row`,
 been lost in`,
             highlight: '2022',
         }}/>
+            </div>
         </div>
     )
 }
