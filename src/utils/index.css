@@ -33,3 +33,20 @@ html{
     position: relative;
 }
 
+::-webkit-scrollbar-thumb {
+    background: #191E29;
+  }
+
+::-webkit-scrollbar-track{
+    background: #00AB66;
+}
+
+#card{
+    background: rgba(8, 8, 8, 0.00);
+}
+
+#src::after{
+    content: url("../../../public/arrowsrc.svg");
+    margin-left: 1rem;
+}
+

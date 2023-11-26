@@ -22,9 +22,9 @@ export default function Info(){
             <div className="flex flex-row ml-[27vw] mt-[15rem] relative">
                 <p className="text-[2.2rem] tracking-wide leading-widest font-bold mr-[5rem] whitespace-nowrap opacity-95" style={textstyle}>3% average <span className="font-black">every year.<br /></span>(1B metric tons)</p>
                 <img src={arrow} className="scale-[1.3] -rotate-[16deg]" />
-                <div className="h-[24rem] w-[43rem] absolute bottom-0 right-0 mr-[42rem] rounded-2xl flex flex-col opacity-95" style={{backgroundColor: '#00AB66'}}>
-                    <h1 className="text-[4rem] font-extrabold underline pl-16 pt-10" style={textstyle}>90%</h1>
-                    <p className = "text-[2.4rem] font-bold leading-[3.4rem] opacity-95 pl-16 mt-6" style={textstyle}>Amount of increase of CO2 emissions over the last 30<br /> years.</p>
+                <div className="h-[24rem] w-[43rem] absolute bottom-0 right-0 mr-[42rem] rounded-2xl flex flex-col opacity-95" style={{backgroundColor: '#00AB66'}} data-aos="fade-left" data-aos-duration="600">
+                    <h1 className="text-[4rem] font-extrabold underline pl-16 pt-10" style={textstyle} data-aos="fade-down-right" data-aos-duration="500">90%</h1>
+                    <p className = "text-[2.4rem] font-bold leading-[3.4rem] opacity-95 pl-16 mt-6" style={textstyle} data-aos="fade-left" data-aos-duration="600">Amount of increase of CO2 emissions over the last 30<br /> years.</p>
                 </div>
             </div>
         </div>
