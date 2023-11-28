@@ -1,24 +1,18 @@
 import * as THREE from 'three';
 import { camera, controls} from './camera';
 import { renderer } from './renderer';
-
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 
 const scene = new THREE.Scene();
 const canvas = document.getElementById('game');
 const clock = new THREE.Clock();
 const canvasGame = renderer.domElement;
-
-const square = new THREE.BoxGeometry(1,0.1,1);
-const light = new THREE.MeshBasicMaterial({color: 0xE0C4A8})
-const dark = new THREE.MeshBasicMaterial({color: 0x6A4236})
-const cube = new THREE.Mesh(square, light)
-const board = new THREE.Group();
-const ambl = new THREE.AmbientLight(0xFFFFFF);
+const loader = new GLTFLoader();
+const mapCords = new THREE.Vector3();
+const ambientLight = new THREE.AmbientLight( 0xffffff, 3)
 
 let cameraPos = new THREE.Vector3();
-let boardPos = new THREE.Vector3();
-
 let topPov = true
 
 let isDragging = false;
@@ -54,7 +48,8 @@ const mousedown = (event) => {
 }
 
 
-scene.background = new THREE.Color(0xff0000);
+scene.background = new THREE.Color(0xffffff);
+scene.add(ambientLight)
 canvas.appendChild( renderer.domElement);
 const grab = document.querySelector('canvas')
 grab.addEventListener('mousedown', () =>{
@@ -64,26 +59,12 @@ grab.addEventListener('mouseup', () =>{
 	grab.style.cursor = "grab";
 })
 
-for (let x = 0; x < 10; x++){
-	for (let z = 0; z < 10; z++){
-		let cube;
-		if (z%2 == 0){
-			cube = new THREE.Mesh(square, x % 2 == 0 ? light : dark)
-		}
-		else{
-			cube = new THREE.Mesh(square, x % 2 == 0 ? dark : light)
-		}
-		cube.position.set(x,0,z)
-		board.add(cube)
+loader.load('../../../public/map-beta.glb', (gltf) =>{
+		const map = gltf.scene;
+		map.scale.set(2.7,2.7,2.7)
+		scene.add(map);
 	}
-}
-
-scene.add(ambl)
-scene.add(board);
-boardPos.x = board.position.x;
-boardPos.y = board.position.y;
-boardPos.z = board.position.z;
-
+)
 controls.getPosition(cameraPos, true)
 
 
@@ -100,7 +81,7 @@ function animate() {
 		topPov = true
 		controls.draggingSmoothTime = 0.2
 		controls.smoothTime = 0.4
-		controls.lerpLookAt(0, 10, 5, boardPos.x, boardPos.y, boardPos.z,0, 3,5, 0, 2, 0, 0.8, true)
+		controls.lerpLookAt(0, 10, 5, 0, 0, 0,0, 3,5, 0, 2, 0, 0.8, true)
 
 		canvasGame.addEventListener('mousedown', mousedown);
 		
@@ -110,7 +91,7 @@ function animate() {
 	}
 	else if (cameraPos.y > 5 && topPov == true){
 
-		controls.setLookAt(0, 20, 0, boardPos.x, boardPos.y, boardPos.z, true)
+		controls.setLookAt(0, 20, 0, 0, 0, 0, true)
 
 
 		canvasGame.removeEventListener('mousemove', dragMouse)
