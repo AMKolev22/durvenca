@@ -13,7 +13,7 @@ controls.mouseButtons.right = CameraControls.ACTION.TRUCK;
 controls.mouseButtons.left = CameraControls.ACTION.TRUCK;
 
 controls.minDistance = 5
-controls.maxDistance = 50
+controls.maxDistance = 40
 controls.dollyToCursor = true
 controls.smoothTime = 0.4
 

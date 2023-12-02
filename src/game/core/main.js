@@ -101,6 +101,7 @@ function animate() {
 	}
 
 	if (states.move == true ){
+		grab.style.cursor = "grab"
 		grab.addEventListener('mousedown', grabHandler)
 		grab.addEventListener('mouseup', grabDown)
 		moveState();

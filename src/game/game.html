@@ -9,24 +9,30 @@
 		</style>
 	</head>
 	<body>
-		<div class="w-screen h-[8rem] flex flex-row items-center list-none" id = "nav">
-			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md object-cover border-solid border-[0.1rem]" id = "btn-div">
-				<li id = "btn-cursor">
+		<div class="w-screen h-[8rem] flex flex-row items-center list-none absolute" id = "nav" style="background-color: rgba(255, 255, 255, 0) !important;">
+			<a href="#">
+				<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md object-cover border-solid border-[0.1rem] ml-[1.5rem] shadow-none hover:-translate-y-2 transition-transform duration-200 btn-div" id = "btn-cursor">
+				<li>
 					<img src="../../public/cursor-pointer.svg" alt="">
 				</li>
 			</div>
-			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem]" id = "btn-div">
-				<li id = "btn-tree">
+		</a>
+		<a href = "#">
+			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem] shadow-none hover:-translate-y-2 transition-transform duration-200  btn-div" id = "btn-tree" >
+				<li>
 					<img src="../../public/tree-icon.svg" alt="">
 				</li>
 			</div>
-			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem]" id = "btn-div">
-				<li id = "btn-factory">
+		</a>
+		<a href="#">
+			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem] hover:-translate-y-2 transition-transform duration-200  shadow-none btn-div" id = "btn-factory">
+				<li>
 					<img src="../../public/factory-icon.svg" alt="">
 				</li>
 			</div>
-		</div>
-		<div id="game" class="z-50"></div>
+		</a>
+	</div>
+	<div id="game" class="z-50"></div>
 		<audio src="../../public/bg-music.mp3" autoplay="" loop="" id = "audio"></audio>
 		<script type="module" src="./scripts/grab.js"></script>
 		<script type = "module" src="./scripts/states.js"></script>

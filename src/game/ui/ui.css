@@ -10,7 +10,11 @@ html{
     background-color : #000;
 }
 
-#btn-div{
+.btn-div{
     background-color: #fff; 
     border-color: #9394A5;
+}
+
+canvas{
+    z-index: 999 !important;
 }
