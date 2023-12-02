@@ -2,21 +2,33 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../utils/tailwind.css">
-		<link rel="stylesheet" href="ui/canvas.css">
+		<link rel="stylesheet" href="ui/ui.css">
 		<link rel="stylesheet" href="../utils/index.css">
+		<link rel="stylesheet" href="../utils/tailwind.css">
 		<style>
 		</style>
 	</head>
 	<body>
-		<nav class="w-screen h-[7rem] flex flex-row items-start">
-			<li>
-				dsadsa
-			</li>
-		</nav>
-		<div id="game" ></div>
-		<div style="width: 100vw; height: 70px; margin-bottom: 100px;">dsadsada</div>
+		<div class="w-screen h-[8rem] flex flex-row items-center list-none" id = "nav">
+			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md object-cover border-solid border-[0.1rem]" id = "btn-div">
+				<li id = "btn-cursor">
+					<img src="../../public/cursor-pointer.svg" alt="">
+				</li>
+			</div>
+			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem]" id = "btn-div">
+				<li id = "btn-tree">
+					<img src="../../public/tree-icon.svg" alt="">
+				</li>
+			</div>
+			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem]" id = "btn-div">
+				<li id = "btn-factory">
+					<img src="../../public/factory-icon.svg" alt="">
+				</li>
+			</div>
+		</div>
+		<div id="game" class="z-50"></div>
 		<audio src="../../public/bg-music.mp3" autoplay="" loop="" id = "audio"></audio>
+		<script type = "module" src="./scripts/states.js"></script>
 		<script defer type="module" src="core/main.js"></script>
 	</body>
 </html>

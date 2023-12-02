@@ -1,16 +1,22 @@
 import * as THREE from 'three';
 import { renderer } from './renderer';
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls"
+import CameraControls from 'camera-controls';
 
 
 
+CameraControls.install( { THREE: THREE } );
+export const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
+export const controls = new CameraControls(camera, renderer.domElement);
 
-export const camera = new THREE.PerspectiveCamera( 45, 1, 0.1, 1000 );
-export const controls = new OrbitControls( camera, renderer.domElement );
+controls.setPosition(0, 25, 5)
+controls.mouseButtons.right = CameraControls.ACTION.TRUCK;
+controls.mouseButtons.left = CameraControls.ACTION.TRUCK;
 
-camera.position.set( 0, 0, 100 );
-controls.maxDistance = 250;
-controls.dampingFactor = 1;
-controls.enableDamping = true;
-controls.enableRotate = false;
-controls.minDistance = 50;
+controls.minDistance = 5
+controls.maxDistance = 50
+controls.dollyToCursor = true
+controls.smoothTime = 0.4
+
+controls.verticalDragToForward = true;
+
+controls.draggingSmoothTime = 0.1
