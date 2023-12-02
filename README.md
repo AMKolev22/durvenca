@@ -62,10 +62,16 @@
 <pre>git clone https://github.com/AMKolev22/durvenca.git</pre>
 <br>
 <p>Open it in your favourite code editor or IDE, build a new terminal and <b>type the following: </b> </p>
-<pre>npm i</pre>
+<pre>
+npx tailwind -i src/utils/index.css -o src/utils/tailwind.css --watch <b>(--watch optional)</b>
+npm i
+</pre>
 <br>
-<p>And finally, start the server using vite: </p>
-<pre>npx vite </pre>
+<p>And finally, start the server using vite <b>(both do the same)</b>: </p>
+<pre>
+npx vite 
+npm run dev
+</pre>
 <br>
 <p>You will see that a server has been created at a certain port. To open the project in the browser, press 'o'<br> and you are going to see it pop up.</p>
 
