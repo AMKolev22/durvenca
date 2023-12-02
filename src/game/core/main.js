@@ -3,6 +3,7 @@ import { camera, controls} from './camera';
 import { renderer } from './renderer';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { states, moveState, buildFactory } from '../scripts/states';
+import { grab } from '../scripts/grab';
 
 
 
@@ -100,9 +101,14 @@ function animate() {
 	}
 
 	if (states.move == true ){
+		grab.addEventListener('mousedown', grabHandler)
+		grab.addEventListener('mouseup', grabDown)
 		moveState();
 	}
 	else if (states.factory == true){
+		grab.removeEventListener('mousedown', grabHandler)
+		grab.removeEventListener('mouseup', grabDown)
+		grab.style.cursor = "default"
 		buildFactory();
 	}
 

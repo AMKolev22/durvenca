@@ -1,4 +1,4 @@
-const grab = document.querySelector('canvas')
+export const grab = document.querySelector('canvas')
 
 export function grabHandler(){
     grab.style.cursor = "grabbing";
