@@ -3,7 +3,6 @@ import { camera, controls} from './camera';
 import { renderer } from './renderer';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { states, moveState, buildFactory } from '../scripts/states';
-import CameraControls from 'camera-controls';
 
 
 
@@ -55,13 +54,6 @@ const mousedown = (event) => {
 scene.background = new THREE.Color(0xffffff);
 scene.add(ambientLight)
 canvas.appendChild( renderer.domElement);
-const grab = document.querySelector('canvas')
-grab.addEventListener('mousedown', () =>{
-	grab.style.cursor = "grabbing";
-})
-grab.addEventListener('mouseup', () =>{
-	grab.style.cursor = "grab";
-})
 
 loader.load('../../../public/soft_hills.glb', (gltf) =>{
 		map = gltf.scene;
