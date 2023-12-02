@@ -3,7 +3,7 @@ import { camera, controls} from './camera';
 import { renderer } from './renderer';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { states, moveState, buildFactory } from '../scripts/states';
-import { grab } from '../scripts/grab';
+import { grab, grabHandler, grabDown } from '../scripts/grab';
 
 
 
