@@ -87,7 +87,7 @@ function animate() {
 	}
 	else if (cameraPos.y > 5 && topPov == true){
 
-		controls.setLookAt(0, 20, 0, 0, 0, 0, true)
+		controls.setLookAt(0, 35, 0, 0, 0, 0, true)
 
 
 		canvasGame.removeEventListener('mousemove', dragMouse)
@@ -113,8 +113,7 @@ function animate() {
 		buildFactory();
 	}
 
-	console.log(states.move);
-	console.log(topPov);
+	console.log(cameraPos.x)
 
 	controls.getPosition(cameraPos, true)
 	controls.update(delta)
