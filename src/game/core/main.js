@@ -53,6 +53,9 @@ loader.load('../../../public/soft_hills.glb', (gltf) =>{
 		scene.add(map);
 	}
 )
+
+
+
 controls.getPosition(cameraPos, true)
 
 
@@ -103,8 +106,6 @@ function animate() {
 		grab.style.cursor = "default"
 		buildFactory();
 	}
-
-	console.log(cameraPos.x)
 
 	controls.getPosition(cameraPos, true)
 	controls.update(delta)

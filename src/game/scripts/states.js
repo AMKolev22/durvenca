@@ -1,5 +1,6 @@
 import { controls } from '../core/camera';
 import CameraControls from 'camera-controls';
+import { setCords, mouseCords } from './detectMouseClick';
 
 
 export const states = {
@@ -36,12 +37,11 @@ factory.addEventListener('click', () =>{
 export function buildFactory(){
     controls.mouseButtons.left = CameraControls.ACTION.NONE; //experimental
     controls.mouseButtons.right = CameraControls.ACTION.NONE;
+    setCords();
+    console.log(mouseCords.x)
 }
 export function moveState(){
     controls.mouseButtons.left = CameraControls.ACTION.TRUCK;
     controls.mouseButtons.right = CameraControls.ACTION.TRUCK;
-
-
-
-
+    setCords();
 }
