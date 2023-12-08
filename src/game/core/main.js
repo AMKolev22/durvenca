@@ -1,8 +1,8 @@
-import * as THREE from 'three';
+import { Color } from 'three';
 import { camera, controls} from './camera';
 import { renderer } from './renderer';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { states, moveState, buildFactory } from '../scripts/states';
+import { states, moveState, buildFactory} from '../scripts/states';
 import { grab, grabHandler, grabDown } from '../scripts/grab';
 import { scene, ambientLight, clock, cameraPos, canvasGame, loader } from "../utils/vars"
 
@@ -14,6 +14,7 @@ let isDragging = false;
 const canvas = document.getElementById('game');
 let topPov = true
 let map;
+
 
 function dragMouse(event){
 	controls.smoothTime = 0.4
@@ -42,7 +43,7 @@ const mousedown = (event) => {
 }
 
 
-scene.background = new THREE.Color(0xffffff);
+scene.background = new Color(0xffffff);
 scene.add(ambientLight)
 canvas.appendChild( renderer.domElement);
 

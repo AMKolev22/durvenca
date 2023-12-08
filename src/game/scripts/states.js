@@ -16,18 +16,21 @@ cursor.addEventListener('click', () =>{
     states.move = true;
     states.factory = false;
     states.tree = false;
+
 })
 
 tree.addEventListener('click', () =>{
     states.move = false;
     states.tree = true;
     states.factory = false;
+
 })
 
 factory.addEventListener('click', () =>{
     states.move = false;
     states.tree = false;
     states.factory = true;
+
 })
 
 export function buildFactory(){
@@ -37,4 +40,8 @@ export function buildFactory(){
 export function moveState(){
     controls.mouseButtons.left = CameraControls.ACTION.TRUCK;
     controls.mouseButtons.right = CameraControls.ACTION.TRUCK;
+
+
+
+
 }
