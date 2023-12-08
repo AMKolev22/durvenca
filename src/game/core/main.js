@@ -4,39 +4,29 @@ import { renderer } from './renderer';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { states, moveState, buildFactory } from '../scripts/states';
 import { grab, grabHandler, grabDown } from '../scripts/grab';
+import { scene, ambientLight, clock, cameraPos, canvasGame, loader } from "../utils/vars"
 
-
-
-const scene = new THREE.Scene();
-const canvas = document.getElementById('game');
-const clock = new THREE.Clock();
-const canvasGame = renderer.domElement;
-const loader = new GLTFLoader();
-const mapCords = new THREE.Vector3();
-const ambientLight = new THREE.AmbientLight( 0xffffff, 3)
-const box = new THREE.Box3()
-let map;
-let cameraPos = new THREE.Vector3();
-let topPov = true
-
-let isDragging = false;
 let previousMousePosition = {
     x: 0,
     y: 0,
-};
+}
+let isDragging = false;
+const canvas = document.getElementById('game');
+let topPov = true
+let map;
 
 function dragMouse(event){
 	controls.smoothTime = 0.4
-			controls.draggingSmoothTime = 0.03
-			if (isDragging) {
-				const deltaX = event.clientX - previousMousePosition.x;
+	controls.draggingSmoothTime = 0.03
+	if (isDragging) {
+		const deltaX = event.clientX - previousMousePosition.x;
 		
-				controls.rotate(deltaX * 0.0025, 0);
+		controls.rotate(deltaX * 0.0025, 0);
 		
-				previousMousePosition = {
-					x: event.clientX,
-				};
-			}
+		previousMousePosition = {
+			x: event.clientX,
+			};
+		}
 }
 
 const mouseup = () => {
