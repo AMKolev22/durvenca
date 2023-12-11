@@ -34,10 +34,12 @@ a row`,
             heading: 'Forestation',
             stats: '10M',
             info: `acres of forest has 
-been lost in`,
-            highlight: '2022',
+been lost in 2022`,
+            highlight: 'alone',
         }}/>
+        
             </div>
         </div>
     )
 }
+         
