@@ -1,10 +1,12 @@
-import { Color } from 'three';
-import { camera, controls} from './camera';
+import { Color, Raycaster } from 'three';
+import { camera, controls } from './camera';
+import CameraControls from 'camera-controls';
 import { renderer } from './renderer';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { states, moveState, buildFactory} from '../scripts/states';
+import { states } from '../scripts/states';
 import { grab, grabHandler, grabDown } from '../scripts/grab';
 import { scene, ambientLight, clock, cameraPos, canvasGame, loader } from "../utils/vars"
+import { raycaster, mouseCords } from '../scripts/detectMouseClick';
 
 let previousMousePosition = {
     x: 0,
@@ -14,8 +16,6 @@ let isDragging = false;
 const canvas = document.getElementById('game');
 let topPov = true
 let map;
-
-
 function dragMouse(event){
 	controls.smoothTime = 0.4
 	controls.draggingSmoothTime = 0.03
@@ -51,8 +51,25 @@ loader.load('../../../public/soft_hills.glb', (gltf) =>{
 		map = gltf.scene;
         map.position.set(0,0,0);
 		scene.add(map);
+		raycaster.intersectObjects(map.children, true);
 	}
 )
+
+function handleClick(event){
+	mouseCords.x = (event.clientX / window.innerWidth) * 2 - 1;
+	mouseCords.y = -(event.clientY / window.innerHeight) * 2 + 1;
+	raycaster.setFromCamera(mouseCords,camera);
+	if (map){
+		let point = raycaster.intersectObjects(map.children, true);
+		if (point.length > 0){
+			let clickedPointCords = point[0].point
+			console.log("Clicked point:", clickedPointCords)
+		}
+	}
+}
+canvasGame.addEventListener('click', handleClick, false)
+
+
 
 
 
@@ -98,13 +115,15 @@ function animate() {
 		grab.style.cursor = "grab"
 		grab.addEventListener('mousedown', grabHandler)
 		grab.addEventListener('mouseup', grabDown)
-		moveState();
+		controls.mouseButtons.left = CameraControls.ACTION.TRUCK; 
+		controls.mouseButtons.right = CameraControls.ACTION.TRUCK;
 	}
 	else if (states.factory == true){
 		grab.removeEventListener('mousedown', grabHandler)
 		grab.removeEventListener('mouseup', grabDown)
 		grab.style.cursor = "default"
-		buildFactory();
+		controls.mouseButtons.left = CameraControls.ACTION.NONE; 
+		controls.mouseButtons.right = CameraControls.ACTION.NONE;
 	}
 
 	controls.getPosition(cameraPos, true)
