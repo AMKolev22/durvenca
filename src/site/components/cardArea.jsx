@@ -40,11 +40,11 @@ been lost in 2022`,
         
         <Card
         theme = {{
-            color: '#00AB66',
+            color: '#3457D5',
             heading: 'Cold',
             stats: '45+',
             info: `years since we've had ,
-             a colder-than-average year` ,
+a colder-than-average year` ,
         }}/>
             </div>
         </div>
