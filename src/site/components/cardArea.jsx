@@ -38,6 +38,14 @@ been lost in 2022`,
             highlight: 'alone',
         }}/>
         
+        <Card
+        theme = {{
+            color: '#00AB66',
+            heading: 'Cold',
+            stats: '45+',
+            info: `years since we've had ,
+             a colder-than-average year` ,
+        }}/>
             </div>
         </div>
     )
