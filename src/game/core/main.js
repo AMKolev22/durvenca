@@ -15,7 +15,7 @@ let previousMousePosition = {
     y: 0,
 }
 let corners=[];
-let counter = 0;
+let isModelLoaded = false;
 const canvas = document.getElementById('game');
 let map, model, boundingBox, clickedPoint, isDragging = false, topPov = true;
 const mapCornerPoints = [];
@@ -83,6 +83,29 @@ function handleClick(event){
 	}
 }
 
+async function spawnTree(e){
+	if (!isModelLoaded){
+		isModelLoaded = true;
+		handleClick(e);
+		const modelPath = '../../../public/tree.glb';
+		const loadedModel = await loadTree(modelPath);
+		if (model) {
+			model.traverse(child => {
+				if (child.isMesh) {
+					child.geometry.dispose();
+					child.material.dispose();
+					child = null;
+				}
+			});
+		}
+		model = loadedModel;
+		model.position.set(clickedPoint.x, clickedPoint.y, clickedPoint.z);
+		scene.add(model);
+		model = null;
+		isModelLoaded = false; 
+	}
+}
+
 function animate() {
 	const delta = clock.getDelta();
 
@@ -122,8 +145,8 @@ function animate() {
 
 	if (states.move === true ) {
 
+		canvasGame.removeEventListener('click', spawnTree, false)
 		grab.style.cursor = "grab"
-	
 		grab.addEventListener('mousedown', grabHandler)
 		grab.addEventListener('mouseup', grabDown)
 		
@@ -133,6 +156,7 @@ function animate() {
 	
 	else if (states.factory === true) {
 	
+		canvasGame.removeEventListener('click', spawnTree, false)
 		grab.removeEventListener('mousedown', grabHandler)
 		grab.removeEventListener('mouseup', grabDown)
 	
@@ -153,33 +177,9 @@ function animate() {
 	
 		controls.mouseButtons.left = CameraControls.ACTION.NONE; 
 		controls.mouseButtons.right = CameraControls.ACTION.NONE;
-		canvasGame.addEventListener('click', async(e) => {
-				counter++;
-				handleClick(e);
-				if (counter == 1){
-				const modelPath = '../../../public/tree.glb';
-				const loadedModel = await loadTree(modelPath);
-				
-				if (model) {
-					model.traverse(child => {
-						if (child.isMesh) {
-							child.geometry.dispose();
-							child.material.dispose();
-						}
-					});
-				}
-		
-				model = loadedModel;
-				model.position.set(clickedPoint.x, clickedPoint.y, clickedPoint.z);
-				scene.add(model);
-
-			}
-			counter = 0;
-		});
+		canvasGame.addEventListener('click', spawnTree, false)
 	}
-
-
-
+	
 	controls.getPosition(cameraPos, true)
 	controls.update(delta)
 	requestAnimationFrame( animate );
