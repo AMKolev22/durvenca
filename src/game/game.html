@@ -5,36 +5,41 @@
 		<link rel="stylesheet" href="ui/ui.css">
 		<link rel="stylesheet" href="../utils/index.css">
 		<link rel="stylesheet" href="../utils/tailwind.css">
+		<link rel="stylesheet" href="./ui/load.css">
 		<style>
 		</style>
 	</head>
 	<body>
-		<div class="w-screen h-[8rem] flex flex-row items-center list-none absolute" id = "nav" style="background-color: rgba(255, 255, 255, 0) !important;">
+		<div class="spinner-div w-screen h-screen flex justify-center items-center flex-col"><div class="spinner"></div><p class="text-center opacity-80">Transform the world.</p></div>
+		<div class="main">
+			<div class="w-screen h-[8rem] flex flex-row items-center list-none absolute" id = "nav" style="background-color: rgba(255, 255, 255, 0) !important;">
+				<a href="#">
+					<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md object-cover border-solid border-[0.1rem] ml-[1.5rem] shadow-none hover:-translate-y-2 transition-transform duration-200 btn-div" id = "btn-cursor">
+					<li>
+						<img src="../../public/cursor-pointer.svg" alt="">
+					</li>
+				</div>
+			</a>
+			<a href = "#">
+				<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem] shadow-none hover:-translate-y-2 transition-transform duration-200  btn-div" id = "btn-tree" >
+					<li>
+						<img src="../../public/tree-icon.svg" alt="">
+					</li>
+				</div>
+			</a>
 			<a href="#">
-				<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md object-cover border-solid border-[0.1rem] ml-[1.5rem] shadow-none hover:-translate-y-2 transition-transform duration-200 btn-div" id = "btn-cursor">
-				<li>
-					<img src="../../public/cursor-pointer.svg" alt="">
-				</li>
+				<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem] hover:-translate-y-2 transition-transform duration-200  shadow-none btn-div" id = "btn-factory">
+					<li>
+						<img src="../../public/factory-icon.svg" alt="">
+					</li>
+				</div>
+			</a>
+			<p class="ml-auto text-[1.5rem] font-semibold" style="font-family: 'Inter', sans-serif !important;">SEED: <span id = "num"></span></p>
 			</div>
-		</a>
-		<a href = "#">
-			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem] shadow-none hover:-translate-y-2 transition-transform duration-200  btn-div" id = "btn-tree" >
-				<li>
-					<img src="../../public/tree-icon.svg" alt="">
-				</li>
-			</div>
-		</a>
-		<a href="#">
-			<div class="w-[7rem] h-[6rem] flex justify-center items-center opacity-100 scale-75 rounded-md border-solid border-[0.1rem] hover:-translate-y-2 transition-transform duration-200  shadow-none btn-div" id = "btn-factory">
-				<li>
-					<img src="../../public/factory-icon.svg" alt="">
-				</li>
-			</div>
-		</a>
-		<p class="ml-auto text-[1.5rem] font-semibold" style="font-family: 'Inter', sans-serif !important;">SEED: <span id = "num"></span></p>
-	</div>
-	<div id="game" class="z-50"></div>
+			<div id="game" class="z-50"></div>
+		</div>
 		<audio src="../../public/bg-music.mp3" autoplay="" loop="" id = "audio"></audio>
+		<script src="./utils/loading.js"></script>
 		<script type="module" src="./scripts/worldInfo.js"></script>
 		<script type="module" src="./scripts/grab.js"></script>
 		<script type = "module" src="./scripts/states.js"></script>
