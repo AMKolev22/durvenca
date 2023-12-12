@@ -21,6 +21,12 @@ export let state = {
 let isModelLoaded = false, shouldPreLoad = true;
 const canvas = document.getElementById('game');
 let map, model, boundingBox, clickedPoint, isDragging = false, topPov = true;
+const co2Element = document.getElementById('co2')
+const treeCountElement = document.getElementById('treecount');
+const factoryCountElement = document.getElementById('factorycount');
+let co2count = 0;
+let treeCount = seedInfo.trees;
+let factoryCount = 0;
 function dragMouse(event){
 	controls.smoothTime = 0.4
 	controls.draggingSmoothTime = 0.03
@@ -78,6 +84,10 @@ function handleClick(event){
 async function spawnTree(e){
 	if (!isModelLoaded){
 		isModelLoaded = true;
+		co2count = Math.round(co2count - 0.0218); // 
+		co2Element.innerHTML = Math.round(((co2count) / 1000000)) + "MT" 
+		treeCount++;
+		treeCountElement.innerHTML = treeCount + "x";
 		handleClick(e);
 		const modelPath = '../../../public/tree.glb';
 		const loadedModel = await loadTree(modelPath);
@@ -100,6 +110,7 @@ async function spawnTree(e){
 
 async function spawnRandomTree(x,y,z){
 		const modelPath = '../../../public/tree.glb';
+		
 		const loadedModel = await loadTree(modelPath);
 		if (model) {
 			model.traverse(child => {
@@ -120,6 +131,10 @@ async function spawnFactory(e){
 	if (!isModelLoaded){
 		isModelLoaded = true;
 		handleClick(e);
+		co2count = Math.round(co2count + 50000);
+		co2Element.innerHTML = ((co2count) / 1000000) + "MT" 
+		factoryCount++;
+		factoryCountElement.innerHTML = factoryCount + "x"
 		const modelPath = '../../../public/factory.glb';
 		const loadedModel = await loadFactory(modelPath);
 		if (model) {
@@ -163,11 +178,14 @@ function animate() {
 	const delta = clock.getDelta();
 
 	if (shouldPreLoad == true && boundingBox != undefined){
+		treeCountElement.innerHTML = treeCount + "x"
+		factoryCountElement.innerHTML = factoryCount + "x"
 		for (let i = 0; i < seedInfo.trees; i++){
 		let x = new Random().integer(boundingBox.min.x + 1, boundingBox.max.x - 2);
 		let y = new Random().integer(boundingBox.min.y, boundingBox.min.y);
 		let z = new Random().integer(boundingBox.min.z + 1, boundingBox.max.z - 2);
 		spawnRandomTree(x,y,z);
+		co2count = co2count - 0.0218;
 		x = null;
 		y = null;
 		z = null;

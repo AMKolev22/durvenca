@@ -34,7 +34,12 @@
 					</li>
 				</div>
 			</a>
-			<p class="ml-auto text-[1.5rem] font-semibold" style="font-family: 'Inter', sans-serif !important;">SEED: <span id = "num"></span></p>
+			<p class="ml-auto text-[1.5rem] font-semibold absolute right-[5rem]" style="font-family: 'Inter', sans-serif !important;">SEED: <span id = "num"></span></p>
+			</div>
+			<p class="text-[2rem] font-medium absolute top-[20%] z-50 left-[3rem]" style="font-family: 'Inter', sans-serif !important; ">CO2: <span id="co2"></span></p>
+			<div class="absolute top-[20%] z-50 right-[6rem] flex flex-col text-[2rem] font-medium">
+				<p class="mb-10 flex flex-row"><span id = "treecount" class="inline-block mr-6"></span><img src="../../public/tree-icon.svg"></p>
+				<p class="flex flex-row"><span id = "factorycount" class="inline-block mr-6"></span><img src="../../public/factory-icon.svg"></p>
 			</div>
 			<div id="game" class="z-50"></div>
 		</div>
