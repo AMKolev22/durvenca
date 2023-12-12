@@ -7,7 +7,14 @@
 <br>
 
 ## 💻 About
-<p align="center">This is our take on the 2023 9th grade project "Green challenges". It's a website which contains an interactive sandbox. <br>Transform the world. <b>Tree by Tree.</b></p>
+<p align="center">This is our take on the 2023 9th grade project "Green challenges". It's a website which contains an interactive sandbox. <br>Transform the world. <b>Tree by Tree.</b>
+</p>
+<p align="center">
+<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/AMKolev22/durvenca">
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/AMKolev22/durvenca">
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/AMKolev22/durvenca">
+<img alt="GitHub languages count"src="https://img.shields.io/github/languages/count/AMKolev22/durvenca">
+
 <br>
 
 ## 🗂️ Core Tech Stack
@@ -51,8 +58,8 @@
 
 ### Presenting and Team Documentation
 
-- [Documentation](test)
-- [Presentation](test)
+- [Documentation](docs/Durvenca-documentation.docx)
+- [Presentation](docs/Durvenca.pptx)
 
 <hr>
 
