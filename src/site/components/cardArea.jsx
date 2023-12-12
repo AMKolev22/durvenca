@@ -19,15 +19,15 @@ export default function CardArea(){
 the last`,
             highlight: '30 years',
         }}/>
-                <Card 
-        theme = {{
-            color: '#FF6B00',
-            heading: 'Temps',
-            stats: '9X',
-            info: `warmest year in 
+              <Card
+              theme = {{
+                color: '#FF6B00',
+                heading: 'Temps',
+                stats: '9X',
+                info: `warmest year in
 a row`,
-            highlight: '(2014-2022)',
-        }}/>
+                highlight: '(2014-2022)', 
+              }}/>
                 <Card 
         theme = {{
             color: '#00AB66',
