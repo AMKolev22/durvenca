@@ -1,24 +1,26 @@
-import { Color, Raycaster, Box3, Vector3 } from 'three';
+import { Color, Raycaster, Box3 } from 'three';
+import { Random } from 'random-js';
 import * as THREE from 'three'
 import { camera, controls } from './camera';
 import CameraControls from 'camera-controls';
 import { renderer } from './renderer';
 import { states } from '../scripts/states';
 import { grab, grabHandler, grabDown } from '../scripts/grab';
-import { scene, ambientLight, clock, cameraPos, canvasGame, loader, treeLoader } from "../utils/vars"
+import { scene, ambientLight, clock, cameraPos, canvasGame, loader } from "../utils/vars"
 import { raycaster, mouseCords } from '../scripts/detectMouseClick';
-import { loadTree } from '../scripts/loadTree';
+import { loadTree, loadFactory } from '../scripts/loadModels';
 import { seedInfo } from '../scripts/worldInfo';
 
 let previousMousePosition = {
     x: 0,
     y: 0,
 }
-let corners=[];
-let isModelLoaded = false;
+export let state = {
+	loaded: false,
+}
+let isModelLoaded = false, shouldPreLoad = true;
 const canvas = document.getElementById('game');
 let map, model, boundingBox, clickedPoint, isDragging = false, topPov = true;
-const mapCornerPoints = [];
 function dragMouse(event){
 	controls.smoothTime = 0.4
 	controls.draggingSmoothTime = 0.03
@@ -53,23 +55,14 @@ canvas.appendChild( renderer.domElement);
 loader.load('../../../public/soft_hills.glb', (gltf) =>{
 		map = gltf.scene;
 		boundingBox = new Box3().setFromObject(map);
-		corners = [
-			new Vector3(boundingBox.min.x, boundingBox.max.y / 2, boundingBox.max.z), //bl
-			new Vector3(boundingBox.min.x, boundingBox.max.y / 4, boundingBox.min.z), //tl
-			new Vector3(boundingBox.max.x, boundingBox.min.y / 2, boundingBox.max.z), //tr
-			new Vector3(boundingBox.max.x, boundingBox.min.y / 4, boundingBox.max.z) //br
-		];
         map.position.set(0,0,0);
-		boundingBox = 
 		scene.add(map);
 		raycaster.intersectObjects(map.children, true);
+		boundingBox = new Box3().setFromObject(map);
 	}
 )
 
-treeLoader.load('../../../public/tree.glb', (gltf) => {
-	model = gltf.scene;
-	model.scale.set(0.05, 0.05, 0.05);
-});
+
 
 function handleClick(event){
 	mouseCords.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -82,7 +75,6 @@ function handleClick(event){
 		}
 	}
 }
-
 async function spawnTree(e){
 	if (!isModelLoaded){
 		isModelLoaded = true;
@@ -106,8 +98,93 @@ async function spawnTree(e){
 	}
 }
 
+async function spawnRandomTree(x,y,z){
+		const modelPath = '../../../public/tree.glb';
+		const loadedModel = await loadTree(modelPath);
+		if (model) {
+			model.traverse(child => {
+				if (child.isMesh) {
+					child.geometry.dispose();
+					child.material.dispose();
+					child = null;
+				}
+			});
+		}
+		model = loadedModel;
+		model.position.set(x,y,z);
+		scene.add(model);
+		model = null;
+}
+
+async function spawnFactory(e){
+	if (!isModelLoaded){
+		isModelLoaded = true;
+		handleClick(e);
+		const modelPath = '../../../public/factory.glb';
+		const loadedModel = await loadFactory(modelPath);
+		if (model) {
+			model.traverse(child => {
+				if (child.isMesh) {
+					child.geometry.dispose();
+					child.material.dispose();
+					child = null;
+				}
+			});
+		}
+		model = loadedModel;
+		model.position.set(clickedPoint.x, clickedPoint.y, clickedPoint.z);
+		scene.add(model);
+		model = null;
+		isModelLoaded = false; 
+	}
+}
+
+// async function spawnRandomFactory(x,y,z){
+// 	const modelPath = '../../../public/factory.glb';
+// 	const loadedModel = await loadFactory(modelPath);
+// 	if (model) {
+// 		model.traverse(child => {
+// 			if (child.isMesh) {
+// 				child.geometry.dispose();
+// 				child.material.dispose();
+// 				child = null;
+// 			}
+// 		});
+// 	}
+// 	model = loadedModel;
+// 	model.position.set(x,y,z);
+// 	scene.add(model);
+// 	model = null;
+// }
+
+
+
 function animate() {
 	const delta = clock.getDelta();
+
+	if (shouldPreLoad == true && boundingBox != undefined){
+		for (let i = 0; i < seedInfo.trees; i++){
+		let x = new Random().integer(boundingBox.min.x + 1, boundingBox.max.x - 2);
+		let y = new Random().integer(boundingBox.min.y, boundingBox.min.y);
+		let z = new Random().integer(boundingBox.min.z + 1, boundingBox.max.z - 2);
+		spawnRandomTree(x,y,z);
+		x = null;
+		y = null;
+		z = null;
+	}
+	// 	for (let i = 0; i < seedInfo.factories; i++){
+	// 	let x = new Random().integer(boundingBox.min.x + 1, boundingBox.max.x - 2);
+	// 	let y = new Random().integer(boundingBox.min.y + 1, boundingBox.max.y);
+	// 	let z = new Random().integer(boundingBox.min.z + 1, boundingBox.max.z - 2);
+	// 	spawnRandomFactory(x,y,z);
+	// 	x = null;
+	// 	y = null;
+	// 	z = null;
+	// }
+	
+	shouldPreLoad = false;	
+}
+// new Random().integer(boundingBox.min.x + 1, boundingBox.max.x - 2);
 
 	if (topPov) {
 		controls.smoothTime = 0.4
@@ -139,13 +216,17 @@ function animate() {
 		controls.draggingSmoothTime = 0.15
 		controls.smoothTime = 0.2
 		topPov = false
-		renderer.domElement
 
 	}
 
 	if (states.move === true ) {
-
+		if (topPov === true){
+			canvasGame.addEventListener('mousemove', dragMouse)
+		}
+		canvasGame.addEventListener('mouseup', mouseup)
+		canvasGame.addEventListener('mousedown', mousedown)
 		canvasGame.removeEventListener('click', spawnTree, false)
+		canvasGame.removeEventListener('click', spawnFactory, false)
 		grab.style.cursor = "grab"
 		grab.addEventListener('mousedown', grabHandler)
 		grab.addEventListener('mouseup', grabDown)
@@ -157,6 +238,9 @@ function animate() {
 	else if (states.factory === true) {
 	
 		canvasGame.removeEventListener('click', spawnTree, false)
+		canvasGame.removeEventListener('mousemove', dragMouse)
+		canvasGame.removeEventListener('mouseup', mouseup)
+		canvasGame.removeEventListener('mousedown', mousedown)
 		grab.removeEventListener('mousedown', grabHandler)
 		grab.removeEventListener('mouseup', grabDown)
 	
@@ -164,14 +248,18 @@ function animate() {
 	
 		controls.mouseButtons.left = CameraControls.ACTION.NONE; 
 		controls.mouseButtons.right = CameraControls.ACTION.NONE;
-
+		canvasGame.addEventListener('click', spawnFactory, false)
 
 	}
 	
 	else if (states.tree == true) {
 	
+		canvasGame.removeEventListener('click', spawnFactory, false)
 		grab.removeEventListener('mousedown', grabHandler)
 		grab.removeEventListener('mouseup', grabDown)
+		canvasGame.removeEventListener('mousemove', dragMouse)
+		canvasGame.removeEventListener('mouseup', mouseup)
+		canvasGame.removeEventListener('mousedown', mousedown)
 	
 		grab.style.cursor = "default"
 	
@@ -179,7 +267,7 @@ function animate() {
 		controls.mouseButtons.right = CameraControls.ACTION.NONE;
 		canvasGame.addEventListener('click', spawnTree, false)
 	}
-	
+
 	controls.getPosition(cameraPos, true)
 	controls.update(delta)
 	requestAnimationFrame( animate );

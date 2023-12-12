@@ -1,6 +1,3 @@
-import { controls } from '../core/camera';
-import CameraControls from 'camera-controls';
-
 
 export const states = {
     move: true,
@@ -34,15 +31,3 @@ factory.addEventListener('click', () =>{
     console.log(states.factory)
 
 })
-
-// function buildFactory(){
-//     controls.mouseButtons.left = CameraControls.ACTION.NONE; 
-//     controls.mouseButtons.right = CameraControls.ACTION.NONE;
-//     setCords();
-//     console.log(mouseCords.x)
-// }
-//  function moveState(){
-//     controls.mouseButtons.left = CameraControls.ACTION.TRUCK;
-//     controls.mouseButtons.right = CameraControls.ACTION.TRUCK;
-//     setCords();
-// }

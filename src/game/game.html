@@ -10,7 +10,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="spinner-div w-screen h-screen flex justify-center items-center flex-col"><div class="spinner"></div><p class="text-center opacity-80">Transform the world.</p></div>
+		<div class="spinner-div w-screen h-screen flex justify-center items-center flex-col"><div class="spinner"></div></div>
 		<div class="main">
 			<div class="w-screen h-[8rem] flex flex-row items-center list-none absolute" id = "nav" style="background-color: rgba(255, 255, 255, 0) !important;">
 				<a href="#">
@@ -39,11 +39,11 @@
 			<div id="game" class="z-50"></div>
 		</div>
 		<audio src="../../public/bg-music.mp3" autoplay="" loop="" id = "audio"></audio>
-		<script src="./utils/loading.js"></script>
 		<script type="module" src="./scripts/worldInfo.js"></script>
 		<script type="module" src="./scripts/grab.js"></script>
 		<script type = "module" src="./scripts/states.js"></script>
 		<script type="module" src="./scripts/detectMouseClick.js"></script>
+		<script type="module" src="./utils/loading.js"></script>
 		<script defer type="module" src="core/main.js"></script>
 	</body>
 </html>

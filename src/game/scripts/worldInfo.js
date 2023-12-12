@@ -9,13 +9,13 @@ export const seedInfo = {
 }
 
 const MAX_TREES = 15;
-const MAX_FACTORIES = 10; 
+const MAX_FACTORIES = 5; 
 
 function boundaryCheckAndSet(seedInfo){
     if (seedInfo.trees > 15){
         seedInfo.trees = MAX_TREES;
     }
-    if (seedInfo.factories > 10){
+    if (seedInfo.factories > 5){
         seedInfo.factories = MAX_FACTORIES
     }
 }
