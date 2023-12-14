@@ -64,7 +64,7 @@
 <hr>
 
 ## 📥 Installation
-
+- [Map download](https://www.mediafire.com/file/o3yfu6gi8mzavca/soft_hills.glb/file)
 <p>First you have to clone our project <b>(nodejs required)</b>: </p>
 <pre>git clone https://github.com/AMKolev22/durvenca.git</pre>
 <br>
