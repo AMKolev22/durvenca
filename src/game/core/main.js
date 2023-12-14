@@ -8,8 +8,8 @@ import { states } from '../scripts/states';
 import { grab, grabHandler, grabDown } from '../scripts/grab';
 import { scene, ambientLight, clock, cameraPos, canvasGame, loader } from "../utils/vars"
 import { raycaster, mouseCords } from '../scripts/detectMouseClick';
-import { loadTree, loadFactory } from '../scripts/loadModels';
 import { seedInfo } from '../scripts/worldInfo';
+import { models } from './loader';
 
 let previousMousePosition = {
     x: 0,
@@ -108,23 +108,11 @@ async function spawnTree(e){
 	}
 }
 
-async function spawnRandomTree(x,y,z){
-		const modelPath = '../../../public/tree.glb';
-		
-		const loadedModel = await loadTree(modelPath);
-		if (model) {
-			model.traverse(child => {
-				if (child.isMesh) {
-					child.geometry.dispose();
-					child.material.dispose();
-					child = null;
-				}
-			});
-		}
-		model = loadedModel;
+function spawnRandomTree(x,y,z){
+		model = models.treeModel.clone();
 		model.position.set(x,y,z);
+		
 		scene.add(model);
-		model = null;
 }
 
 async function spawnFactory(e){
@@ -132,7 +120,7 @@ async function spawnFactory(e){
 		isModelLoaded = true;
 		handleClick(e);
 		co2count = Math.round(co2count + 50000);
-		co2Element.innerHTML = ((co2count) / 1000000) + "MT" 
+		co2Element.innerHTML = Math.round(((co2count) / 1000000)) + "MT" 
 		factoryCount++;
 		factoryCountElement.innerHTML = factoryCount + "x"
 		const modelPath = '../../../public/factory.glb';
