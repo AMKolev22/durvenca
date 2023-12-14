@@ -548,80 +548,24 @@ video {
   bottom: 0px;
 }
 
+.left-\[3rem\]{
+  left: 3rem;
+}
+
 .right-0{
   right: 0px;
-}
-
-.right-10{
-  right: 2.5rem;
-}
-
-.right-11{
-  right: 2.75rem;
-}
-
-.right-32{
-  right: 8rem;
-}
-
-.right-16{
-  right: 4rem;
 }
 
 .right-\[5rem\]{
   right: 5rem;
 }
 
-.top-16{
-  top: 4rem;
-}
-
-.top-40{
-  top: 10rem;
-}
-
-.top-\[100\]{
-  top: 100;
-}
-
-.top-\[100\%\]{
-  top: 100%;
-}
-
-.top-\[40\%\]{
-  top: 40%;
+.right-\[6rem\]{
+  right: 6rem;
 }
 
 .top-\[20\%\]{
   top: 20%;
-}
-
-.left-8{
-  left: 2rem;
-}
-
-.left-\[10\%\]{
-  left: 10%;
-}
-
-.left-\[3rem\]{
-  left: 3rem;
-}
-
-.right-\[3rem\]{
-  right: 3rem;
-}
-
-.right-\[0\]{
-  right: 0;
-}
-
-.right-3{
-  right: 0.75rem;
-}
-
-.right-\[6rem\]{
-  right: 6rem;
 }
 
 .z-50{
@@ -630,6 +574,10 @@ video {
 
 .-mb-\[5vh\]{
   margin-bottom: -5vh;
+}
+
+.mb-10{
+  margin-bottom: 2.5rem;
 }
 
 .mb-6{
@@ -664,6 +612,10 @@ video {
   margin-left: auto;
 }
 
+.mr-6{
+  margin-right: 1.5rem;
+}
+
 .mr-\[42rem\]{
   margin-right: 42rem;
 }
@@ -694,26 +646,6 @@ video {
 
 .mt-\[7vh\]{
   margin-top: 7vh;
-}
-
-.mr-11{
-  margin-right: 2.75rem;
-}
-
-.mt-14{
-  margin-top: 3.5rem;
-}
-
-.mb-10{
-  margin-bottom: 2.5rem;
-}
-
-.mr-10{
-  margin-right: 2.5rem;
-}
-
-.mr-6{
-  margin-right: 1.5rem;
 }
 
 .block{
@@ -812,10 +744,6 @@ video {
 
 .gap-5{
   gap: 1.25rem;
-}
-
-.gap-6{
-  gap: 1.5rem;
 }
 
 .whitespace-nowrap{
@@ -965,12 +893,12 @@ video {
   font-weight: 800;
 }
 
-.font-semibold{
-  font-weight: 600;
-}
-
 .font-medium{
   font-weight: 500;
+}
+
+.font-semibold{
+  font-weight: 600;
 }
 
 .leading-\[3\.4rem\]{

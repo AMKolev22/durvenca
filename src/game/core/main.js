@@ -8,8 +8,8 @@ import { states } from '../scripts/states';
 import { grab, grabHandler, grabDown } from '../scripts/grab';
 import { scene, ambientLight, clock, cameraPos, canvasGame, loader } from "../utils/vars"
 import { raycaster, mouseCords } from '../scripts/detectMouseClick';
+import { loadTree, loadFactory } from '../scripts/loadModels';
 import { seedInfo } from '../scripts/worldInfo';
-import { models } from './loader';
 
 let previousMousePosition = {
     x: 0,
@@ -85,7 +85,7 @@ async function spawnTree(e){
 	if (!isModelLoaded){
 		isModelLoaded = true;
 		co2count = Math.round(co2count - 0.0218); // 
-		co2Element.innerHTML = Math.round(((co2count) / 1000000)) + "MT" 
+		co2Element.innerHTML = Math.ceil(((co2count) / 1000000)) + "MT" 
 		treeCount++;
 		treeCountElement.innerHTML = treeCount + "x";
 		handleClick(e);
@@ -108,19 +108,31 @@ async function spawnTree(e){
 	}
 }
 
-function spawnRandomTree(x,y,z){
-		model = models.treeModel.clone();
-		model.position.set(x,y,z);
+// async function spawnRandomTree(x,y,z){
+// 		const modelPath = '../../../public/tree.glb';
 		
-		scene.add(model);
-}
+// 		const loadedModel = await loadTree(modelPath);
+// 		if (model) {
+// 			model.traverse(child => {
+// 				if (child.isMesh) {
+// 					child.geometry.dispose();
+// 					child.material.dispose();
+// 					child = null;
+// 				}
+// 			});
+// 		}
+// 		model = loadedModel;
+// 		model.position.set(x,y,z);
+// 		scene.add(model);
+// 		model = null;
+// }
 
 async function spawnFactory(e){
 	if (!isModelLoaded){
 		isModelLoaded = true;
 		handleClick(e);
-		co2count = Math.round(co2count + 50000);
-		co2Element.innerHTML = Math.round(((co2count) / 1000000)) + "MT" 
+		co2count = Math.ceil(co2count + 50000);
+		co2Element.innerHTML = ((co2count) / 1000000) + "MT" 
 		factoryCount++;
 		factoryCountElement.innerHTML = factoryCount + "x"
 		const modelPath = '../../../public/factory.glb';
@@ -165,19 +177,19 @@ async function spawnFactory(e){
 function animate() {
 	const delta = clock.getDelta();
 
-	if (shouldPreLoad == true && boundingBox != undefined){
-		treeCountElement.innerHTML = treeCount + "x"
-		factoryCountElement.innerHTML = factoryCount + "x"
-		for (let i = 0; i < seedInfo.trees; i++){
-		let x = new Random().integer(boundingBox.min.x + 1, boundingBox.max.x - 2);
-		let y = new Random().integer(boundingBox.min.y, boundingBox.min.y);
-		let z = new Random().integer(boundingBox.min.z + 1, boundingBox.max.z - 2);
-		spawnRandomTree(x,y,z);
-		co2count = co2count - 0.0218;
-		x = null;
-		y = null;
-		z = null;
-	}
+	// if (shouldPreLoad == true && boundingBox != undefined){
+	// 	treeCountElement.innerHTML = treeCount + "x"
+	// 	factoryCountElement.innerHTML = factoryCount + "x"
+	// 	for (let i = 0; i < seedInfo.trees; i++){
+	// 	let x = new Random().integer(boundingBox.min.x + 1, boundingBox.max.x - 2);
+	// 	let y = new Random().integer(boundingBox.min.y, boundingBox.min.y);
+	// 	let z = new Random().integer(boundingBox.min.z + 1, boundingBox.max.z - 2);
+	// 	spawnRandomTree(x,y,z);
+	// 	co2count = co2count - 0.0218;
+	// 	x = null;
+	// 	y = null;
+	// 	z = null;
+	// }
 	// 	for (let i = 0; i < seedInfo.factories; i++){
 	// 	let x = new Random().integer(boundingBox.min.x + 1, boundingBox.max.x - 2);
 	// 	let y = new Random().integer(boundingBox.min.y + 1, boundingBox.max.y);
@@ -188,9 +200,14 @@ function animate() {
 	// 	z = null;
 	// }
 	
-	shouldPreLoad = false;	
-}
+// 	shouldPreLoad = false;	
+// }
 // new Random().integer(boundingBox.min.x + 1, boundingBox.max.x - 2);
+
+	// if (shouldPreLoad == false){
+	// 			treeCount = 0;
+	// 			treeCountElement.innerHTML = treeCount + "x";
+	// }
 
 	if (topPov) {
 		controls.smoothTime = 0.4
